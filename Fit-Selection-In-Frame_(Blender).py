@@ -5,7 +5,7 @@ This script perfectly frames the active camera around the selected
 objects by projecting their exact 3D vertices into the camera's 
 2D view space, calculating the required physical distance 
 based on the camera's true Field of View (FOV).
-""" 
+"""
 
 import bpy
 import math
