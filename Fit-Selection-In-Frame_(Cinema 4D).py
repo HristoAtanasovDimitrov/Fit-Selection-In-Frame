@@ -91,7 +91,7 @@ def fit_selection_in_frame():
 
     # Top-level selected objects only. collect_world_points() clones each with
     # its full hierarchy and recurses, so we must NOT pull in unselected
-    # children here (GETACTIVEOBJECTFLAGS_CHILDREN) — for a Cloner/Sweep that
+    # children here (GETACTIVEOBJECTFLAGS_CHILDREN) - for a Cloner/Sweep that
     # would add the source template at its own position, skewing the framing.
     sel = doc.GetActiveObjects(c4d.GETACTIVEOBJECTFLAGS_0)
     if not sel:

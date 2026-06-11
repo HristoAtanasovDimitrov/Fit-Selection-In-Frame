@@ -1,6 +1,6 @@
 # Fit Selection In Frame
 
-A highly precise, computationally accurate Python script with versions for **Autodesk 3ds Max**, **Blender**, **Autodesk Maya**, and **Maxon Cinema 4D** that perfectly frames the active camera around selected objects by projecting their exact 3D vertices into the camera's 2D view space.
+A precise, computationally accurate script with versions for **Autodesk 3ds Max**, **Blender**, **Autodesk Maya**, **Maxon Cinema 4D**, and **Trimble SketchUp** that perfectly frames the active camera around selected objects by projecting their exact 3D vertices into the camera's 2D view space.
 
 Unlike standard bounding-box tools, these scripts use **Frustum Culling** and **Iterative Optical Centering** to guarantee that the geometry perfectly touches the edges of the frame, avoiding perspective-distortion off-centering.
 
@@ -9,13 +9,13 @@ Unlike standard bounding-box tools, these scripts use **Frustum Culling** and **
 - **Geometric Precision**: Evaluates the actual mesh vertices of your selection rather than a rough rectangular bounds block.
 - **Inverse Screen Percentage Margin**: A mathematically scaled padding model. Set the margin to `0%` to touch the exact pixels of the frame edge, `50%` to occupy exactly half the screen, or `99%` to shrink the object to a tiny speck in the distance.
 - **Aspect Ratio Safe**: Calculates the slope of the view frustum (cone) by verifying both the Render Output Aspect Ratio and the active Viewport size, ensuring it never clips regardless of standard UI window sizing.
-- **Bulletproof Fallbacks**: Safely handles non-geometry objects (Lights, Splines, Empties, Helpers) by falling back to their basic bounding boxes without crashing. In **Maya**, this fallback also covers plugin shapes that expose no polygon mesh — such as **VRayProxy** render proxies — by framing their true world-space bounds (via `exactWorldBoundingBox`) instead of an inaccurate node bounding box.
+- **Bulletproof Fallbacks**: Safely handles non-geometry objects (Lights, Splines, Empties, Helpers) by falling back to their basic bounding boxes without crashing. In **Maya**, this fallback also covers plugin shapes that expose no polygon mesh - such as **VRayProxy** render proxies - by framing their true world-space bounds (via `exactWorldBoundingBox`) instead of an inaccurate node bounding box.
 
 ---
 
 ## Installation
 
-There are separate scripts depending on your 3D software. You do not need to restart your software to use or update them.
+There are separate scripts depending on your 3D software. For 3ds Max, Blender, Maya and Cinema 4D you do not need to restart your software to use or update them.
 
 ### For 3ds Max
 1. Download or clone `Fit-Selection-In-Frame_(3ds Max).py` to your local drive.
@@ -41,15 +41,25 @@ There are separate scripts depending on your 3D software. You do not need to res
 3. Open the **Script Manager** (**Extensions > Script Manager**, or **Shift+F11**).
 4. Open the `Fit-Selection-In-Frame_(Cinema 4D).py` file and click **Execute**.
 
+### For SketchUp
+1. Download or clone `Fit-Selection-In-Frame_(SketchUp).rb` to your local drive.
+2. Copy it into your SketchUp **Plugins** folder:
+   - **Windows**: `%APPDATA%\SketchUp\SketchUp <version>\SketchUp\Plugins`
+   - **Mac**: `~/Library/Application Support/SketchUp <version>/SketchUp/Plugins`
+3. Restart SketchUp (or load the file once via **Window > Ruby Console**).
+4. Run it from **Extensions > Fit Selection In Frame**. You can bind a keyboard shortcut to it under **Window > Preferences > Shortcuts**.
+
 ## Usage
 
-1. **Activate a Camera View**: Ensure the viewport you are actively looking through is a physical or standard camera (e.g., Press `C` in 3ds Max, `Numpad 0` in Blender, look through a camera in Maya, or look through a Camera object in Cinema 4D).
+1. **Activate a Camera View**: Ensure the viewport you are actively looking through is a physical or standard camera (e.g., Press `C` in 3ds Max, `Numpad 0` in Blender, look through a camera in Maya, or look through a Camera object in Cinema 4D; in SketchUp the active view is always a camera, so no extra step is needed).
 2. **Select Objects**: Select the mesh(es) you want to fit on screen.
 3. **Run the Script**. The camera's physical position (and target depth) will seamlessly transition to perfect optical framing. You can freely use `CTRL+Z` to undo the movement instantly.
 
+> **SketchUp note**: SketchUp cannot undo scripted camera moves - neither Ctrl+Z nor **Camera > Previous** applies. Use **Extensions > Fit Selection In Frame - Restore Previous Camera** to jump back to the pre-fit view instead. SketchUp's **Parallel Projection** mode is fully supported (the tool sets the view height instead of moving the camera back). Running the tool while in **Two-Point Perspective** returns the view to standard perspective, exactly as orbiting does.
+
 ## Adjusting the Margin
 
-Open the respective script (`Fit-Selection-In-Frame_(3ds Max).py` or `Fit-Selection-In-Frame_(Blender).py`) in any text editor. At the very top, you will see a simple configuration block:
+Open the respective script (e.g. `Fit-Selection-In-Frame_(3ds Max).py` or `Fit-Selection-In-Frame_(SketchUp).rb`) in any text editor. At the very top, you will see a simple configuration block:
 
 ```python
 # ==========================================
