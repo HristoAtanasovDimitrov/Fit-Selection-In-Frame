@@ -1,6 +1,6 @@
 # Fit Selection In Frame
 
-A precise, computationally accurate script with versions for **Autodesk 3ds Max**, **Blender**, **Autodesk Maya**, **Maxon Cinema 4D**, **Trimble SketchUp**, and **SideFX Houdini** that perfectly frames the active camera around selected objects by projecting their exact 3D vertices into the camera's 2D view space.
+A precise, computationally accurate script with versions for **Autodesk 3ds Max**, **Blender**, **Autodesk Maya**, **Maxon Cinema 4D**, **Trimble SketchUp**, **SideFX Houdini**, and **Rhinoceros 3D** that perfectly frames the active camera around selected objects by projecting their exact 3D vertices into the camera's 2D view space.
 
 Unlike standard bounding-box tools, these scripts use **Frustum Culling** and **Iterative Optical Centering** to guarantee that the geometry perfectly touches the edges of the frame, avoiding perspective-distortion off-centering.
 
@@ -15,7 +15,7 @@ Unlike standard bounding-box tools, these scripts use **Frustum Culling** and **
 
 ## Installation
 
-There are separate scripts depending on your 3D software. For 3ds Max, Blender, Maya, Cinema 4D and Houdini you do not need to restart your software to use or update them.
+There are separate scripts depending on your 3D software. For 3ds Max, Blender, Maya, Cinema 4D, Houdini and Rhino you do not need to restart your software to use or update them.
 
 ### For 3ds Max
 1. Download or clone `Fit-Selection-In-Frame_(3ds Max).py` to your local drive.
@@ -55,15 +55,23 @@ There are separate scripts depending on your 3D software. For 3ds Max, Blender, 
 3. Go to **Windows > Python Source Editor**, paste the contents of the file (or open it), and click **Apply** to run it once.
 4. For a permanent toolbar button: right-click an empty area of any shelf, choose **New Tool...**, paste the script into the **Script** tab (language: Python), and give it a name like *Fit Selection In Frame*. You can bind a keyboard shortcut in the tool's **Hotkeys** tab.
 
+### For Rhino
+1. Download or clone `Fit-Selection-In-Frame_(Rhino).py` to your local drive. The script works in both **Rhino 7** (IronPython) and **Rhino 8** (Python 3).
+2. **Rhino 7**: run `EditPythonScript`, open the file, and press **F5** (or use `_-RunPythonScript` with the file path).
+3. **Rhino 8**: run `ScriptEditor`, open the file, and click **Run**.
+4. For a permanent toolbar button or alias, use the macro: `! _-RunPythonScript "C:\path\to\Fit-Selection-In-Frame_(Rhino).py"`
+
 ## Usage
 
-1. **Activate a Camera View**: Ensure the viewport you are actively looking through is a physical or standard camera (e.g., Press `C` in 3ds Max, `Numpad 0` in Blender, look through a camera in Maya, look through a Camera object in Cinema 4D, or lock the viewport to a camera in Houdini; in SketchUp the active view is always a camera, so no extra step is needed).
+1. **Activate a Camera View**: Ensure the viewport you are actively looking through is a physical or standard camera (e.g., Press `C` in 3ds Max, `Numpad 0` in Blender, look through a camera in Maya, look through a Camera object in Cinema 4D, or lock the viewport to a camera in Houdini; in SketchUp and Rhino the active view is always a camera, so no extra step is needed).
 2. **Select Objects**: Select the mesh(es) you want to fit on screen.
 3. **Run the Script**. The camera's physical position (and target depth) will seamlessly transition to perfect optical framing. You can freely use `CTRL+Z` to undo the movement instantly.
 
 > **SketchUp note**: SketchUp cannot undo scripted camera moves - neither Ctrl+Z nor **Camera > Previous** applies. Use **Extensions > Fit Selection In Frame - Restore Previous Camera** to jump back to the pre-fit view instead. SketchUp's **Parallel Projection** mode is fully supported (the tool sets the view height instead of moving the camera back). Running the tool while in **Two-Point Perspective** returns the view to standard perspective, exactly as orbiting does.
 
 > **Houdini note**: both Perspective and Orthographic camera projections are supported (orthographic fits adjust the camera's **Ortho Width** instead of moving it back). The camera's **Focus Distance** parameter is updated to the selection's depth center. Cameras driven by look-at/CHOP constraints are moved as plain transforms - constraint targets are not relocated.
+
+> **Rhino note**: camera moves are restored with Rhino's **UndoView** command, not Ctrl+Z. Parallel-projection viewports (Top/Front/Right) are fully supported - the tool adjusts the view rectangle instead of moving the camera back. Two-point perspective is treated as plain perspective.
 
 ## Adjusting the Margin
 
