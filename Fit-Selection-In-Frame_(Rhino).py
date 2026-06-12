@@ -21,7 +21,7 @@ import Rhino
 # 0   = The object touches the exact edge of the render frame.
 # 15  = (Default) The object takes up 85% of the frame with a 15% margin around it.
 # 50  = The object takes up 50% of the frame, leaving a massive margin.
-MARGIN_PERCENTAGE = 40.0
+MARGIN_PERCENTAGE = 15.0
 # ==========================================
 
 
